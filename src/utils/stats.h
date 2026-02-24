@@ -1,19 +1,21 @@
-#pragma once
+#ifndef PAPING_UTILS_STATS_H
+#define PAPING_UTILS_STATS_H
 
 #include "utils/standard.h"
 
-class stats_c
+typedef struct stats_s
 {
-	public:
-		double	Minimum;
-		double	Maximum;
-		double	Total;
-		double	Average();
+	double Minimum;
+	double Maximum;
+	double Total;
 
-		int		Attempts;
-		int		Connects;
-		int		Failures;
+	int Attempts;
+	int Connects;
+	int Failures;
+} stats_t;
 
-		void	UpdateMaxMin(double value);
-		int		GetStatisticsString(pcc_t stats);
-};
+double stats_average(const stats_t *stats);
+void stats_update_max_min(stats_t *stats, double value);
+int stats_format(const stats_t *stats, pc_t out, int out_len);
+
+#endif /* PAPING_UTILS_STATS_H */

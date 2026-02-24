@@ -1,20 +1,21 @@
-#pragma once
+#ifndef PAPING_NET_HOST_H
+#define PAPING_NET_HOST_H
 
 #include "utils/standard.h"
 
-class host_c
+typedef struct host_s
 {
-	public:
-		pcc_t	Hostname;
-		in_addr	IPAddress;
-		bool	HostIsIP;
-		int		Port;
-		int		Type;
-		
-		pcc_t	IPAddressString();
-		int		GetConnectInfoString(pcc_t str);
-		int		GetSuccessfulConnectionString(pcc_t str, double time);
+	pcc_t Hostname;
+	struct in_addr IPAddress;
+	int HostIsIP;
+	int Port;
+	int Type;
+} host_t;
 
-		static	pcc_t	GetIPAddressAsString(in_addr ipAddress);
-		static	pcc_t	GetFriendlyTypeName(int type);
-};
+pcc_t host_ip_address_string(const host_t *host);
+int host_format_connect_info(const host_t *host, pc_t out, int out_len);
+int host_format_successful_connection(const host_t *host, double time_ms, pc_t out, int out_len);
+
+pcc_t host_get_ip_address_as_string(struct in_addr ip_address);
+
+#endif /* PAPING_NET_HOST_H */

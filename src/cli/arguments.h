@@ -1,24 +1,22 @@
-#pragma once
+#ifndef PAPING_CLI_ARGUMENTS_H
+#define PAPING_CLI_ARGUMENTS_H
 
 #include "utils/standard.h"
 
-
-class arguments_c
+typedef struct arguments_s
 {
-	public:
-		pcc_t	Destination;
-		int		Port;
-		int		Type;
-		int		Timeout;
-		int		Count;
-		bool	Continous;
-		bool	UseColor;
-		bool	ShowHelp;
+	pcc_t Destination;
+	int Port;
+	int Type;
+	int Timeout;
+	int Count;
+	int Continous;
+	int UseColor;
+	int ShowHelp;
+} arguments_t;
 
-		static	void	PrintBanner();
-		static	void	PrintUsage();
+void arguments_print_banner(void);
+void arguments_print_usage(void);
+int arguments_process(int argc, pc_t argv[], arguments_t *arguments);
 
-		static	int		Process(int argc, pc_t argv[], arguments_c &arguments);
-	private:
-		static	int		match(int pos, int total, pc_t argv[], pcc_t shortName, pcc_t longName, bool expectedValue, int &value, bool &anyMatch);
-};
+#endif /* PAPING_CLI_ARGUMENTS_H */

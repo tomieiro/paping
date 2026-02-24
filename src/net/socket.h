@@ -1,16 +1,15 @@
-#pragma once
+#ifndef PAPING_NET_SOCKET_H
+#define PAPING_NET_SOCKET_H
 
 #include "utils/standard.h"
 
-class socket_c
-{
-	public:
-		static int Resolve(pcc_t hostname, host_c &host);
-		static int SetPortAndType(int port, int type, host_c &host);
+#include "net/host.h"
 
-		static int Connect(host_c host, int timeout, double &time);
+int socket_resolve(pcc_t hostname, host_t *host);
+int socket_set_port_and_type(int port, int type, host_t *host);
+int socket_connect(const host_t *host, int timeout_ms, double *time_ms);
 
-		static int GetSocketType(int type);
-		static pcc_t GetFriendlyTypeName(int type);
+int socket_get_socket_type(int type);
+pcc_t socket_get_friendly_type_name(int type);
 
-};
+#endif /* PAPING_NET_SOCKET_H */
