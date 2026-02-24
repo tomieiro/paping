@@ -1,15 +1,16 @@
-#pragma once
+#ifndef PAPING_UTILS_TIMER_H
+#define PAPING_UTILS_TIMER_H
 
 #include "utils/standard.h"
 
-class timer_c
+typedef struct paping_timer_s
 {
-		public:
-			void	Start();
-			double	Stop();
+	int HasValue;
+	struct timeval Start;
+	struct timeval Stop;
+} paping_timer_t;
 
-		private:
-			bool	hasValue_;
-			timeval	start_;
-			timeval	stop_;
-};
+void timer_start(paping_timer_t *timer);
+double timer_stop(paping_timer_t *timer);
+
+#endif /* PAPING_UTILS_TIMER_H */

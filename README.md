@@ -1,13 +1,13 @@
-# paping2
+# paPing
 
 Utilitário no estilo “ping”, mas para medir tempo de conexão TCP a uma porta (ex.: 80/443/22).
 
 ## Build (Linux)
 
 Requisitos:
-- `g++`
+- `gcc`
 - `make`
-- `g++-multilib` (para compilar o binário 32-bit)
+- `gcc-multilib` (para compilar o binário 32-bit)
 
 Comandos:
 - `make` (gera 32-bit e 64-bit)

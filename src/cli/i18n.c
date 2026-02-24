@@ -1,10 +1,6 @@
-#include "utils/standard.h"
+#include "cli/i18n.h"
 
-
-using namespace std;
-
-
-pcc_t i18n_c::GetString(int id)
+pcc_t i18n_get_string(int id)
 {
 	switch (id)
 	{
@@ -12,8 +8,6 @@ pcc_t i18n_c::GetString(int id)
 														"Options:\n"
 														" -h, -?, --help\tdisplay usage\n"
 														" -p, --port N\tset TCP port N (required)\n"
-														//" -p, --port N\tset TCP/UDP port N (required)\n"
-														//"     --tcp\tuse TCP protocol (default)\n"
 														"     --nocolor\tDisable color output\n"
 														" -t, --timeout N\ttimeout in milliseconds (default 1000)\n"
 														" -c, --count N\tset number of checks to N\n";

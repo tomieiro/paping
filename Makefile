@@ -6,27 +6,28 @@ SRC_DIR := src
 BUILD_DIR := build
 BIN_DIR := bin
 
-CXX ?= g++
+CC ?= gcc
 
 CPPFLAGS ?= -I$(SRC_DIR)
 WARNFLAGS ?= -Wall -Wextra -Wpedantic
-CXXFLAGS ?= -std=c++11 -O2 -pipe $(WARNFLAGS)
+CFLAGS ?= -std=gnu89 -O2 -pipe $(WARNFLAGS)
 
-SOURCES_CPP := \
-	$(SRC_DIR)/main.cpp \
-	$(SRC_DIR)/cli/arguments.cpp \
-	$(SRC_DIR)/cli/i18n.cpp \
-	$(SRC_DIR)/net/host.cpp \
-	$(SRC_DIR)/net/socket.cpp \
-	$(SRC_DIR)/utils/print.cpp \
-	$(SRC_DIR)/utils/stats.cpp \
-	$(SRC_DIR)/utils/timer.cpp
+SOURCES_C := \
+	$(SRC_DIR)/main.c \
+	$(SRC_DIR)/cli/arguments.c \
+	$(SRC_DIR)/cli/i18n.c \
+	$(SRC_DIR)/net/host.c \
+	$(SRC_DIR)/net/socket.c \
+	$(SRC_DIR)/utils/gettimeofday.c \
+	$(SRC_DIR)/utils/print.c \
+	$(SRC_DIR)/utils/stats.c \
+	$(SRC_DIR)/utils/timer.c
 
 OBJ_DIR_I386 := $(BUILD_DIR)/i386
 OBJ_DIR_X86_64 := $(BUILD_DIR)/x86_64
 
-OBJECTS_I386 := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR_I386)/%.o,$(SOURCES_CPP))
-OBJECTS_X86_64 := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR_X86_64)/%.o,$(SOURCES_CPP))
+OBJECTS_I386 := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR_I386)/%.o,$(SOURCES_C))
+OBJECTS_X86_64 := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR_X86_64)/%.o,$(SOURCES_C))
 
 DEPS_I386 := $(OBJECTS_I386:.o=.d)
 DEPS_X86_64 := $(OBJECTS_X86_64:.o=.d)
@@ -49,19 +50,19 @@ x86_64: $(BIN_X86_64)
 
 $(BIN_I386): $(OBJECTS_I386)
 	@mkdir -p $(BIN_DIR)
-	$(CXX) -m32 $^ -o $@
+	$(CC) -m32 $^ -o $@
 
 $(BIN_X86_64): $(OBJECTS_X86_64)
 	@mkdir -p $(BIN_DIR)
-	$(CXX) -m64 $^ -o $@
+	$(CC) -m64 $^ -o $@
 
-$(OBJ_DIR_I386)/%.o: $(SRC_DIR)/%.cpp
+$(OBJ_DIR_I386)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CXX) -m32 $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $< -o $@
+	$(CC) -m32 $(CPPFLAGS) $(CFLAGS) -MMD -MP -c $< -o $@
 
-$(OBJ_DIR_X86_64)/%.o: $(SRC_DIR)/%.cpp
+$(OBJ_DIR_X86_64)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CXX) -m64 $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $< -o $@
+	$(CC) -m64 $(CPPFLAGS) $(CFLAGS) -MMD -MP -c $< -o $@
 
 clean:
 	rm -rf $(BUILD_DIR) $(BIN_DIR)
