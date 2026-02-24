@@ -1,4 +1,6 @@
-#include "standard.h"
+#pragma once
+
+#include "utils/standard.h"
 
 class stats_c
 {

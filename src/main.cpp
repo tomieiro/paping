@@ -1,4 +1,4 @@
-#include "standard.h"
+#include "utils/standard.h"
 
 using namespace std;
 
@@ -40,6 +40,11 @@ int main(int argc, pc_t argv[])
 	{
 		arguments_c::PrintUsage();
 		return ERROR_INVALIDARGUMENTS;
+	}
+	if (arguments.ShowHelp)
+	{
+		arguments_c::PrintUsage();
+		return SUCCESS;
 	}
 
 	useColor = arguments.UseColor;
@@ -132,7 +137,7 @@ void printError(int error)
 	if (useColor)
 		print_c::FormattedPrint(PRINT_COLOR_RED, i18n_c::GetString(error));
 	else
-		print_c::FormattedPrint(NULL, i18n_c::GetString(error));
+		print_c::FormattedPrint(0, i18n_c::GetString(error));
 
 	cout << endl;
 }
@@ -157,7 +162,7 @@ int printConnectInfo(host_c host)
 	if (useColor)
 		print_c::FormattedPrint(PRINT_COLOR_YELLOW, info);
 	else
-		print_c::FormattedPrint(NULL, info);
+		print_c::FormattedPrint(0, info);
 
 	cout << endl << endl;
 
@@ -186,7 +191,7 @@ int printSuccessfulConnection(host_c host, double time)
 	if (useColor)
 		print_c::FormattedPrint(PRINT_COLOR_GREEN, data);
 	else
-		print_c::FormattedPrint(NULL, data);
+		print_c::FormattedPrint(0, data);
 
 	cout << endl;
 
@@ -215,7 +220,7 @@ int printStats()
 	if (useColor)
 		print_c::FormattedPrint(PRINT_COLOR_BLUE, str);
 	else
-		print_c::FormattedPrint(NULL, str);
+		print_c::FormattedPrint(0, str);
 
 	cout << endl;
 
@@ -230,7 +235,7 @@ int printFailedConnection(int error)
 	if (useColor)
 		print_c::FormattedPrint(PRINT_COLOR_RED, i18n_c::GetString(error));
 	else
-		print_c::FormattedPrint(NULL, i18n_c::GetString(error));
+		print_c::FormattedPrint(0, i18n_c::GetString(error));
 
 	cout << endl;
 

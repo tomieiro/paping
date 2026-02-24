@@ -1,4 +1,4 @@
-#include "standard.h"
+#include "utils/standard.h"
 
 
 using namespace std;
@@ -10,12 +10,12 @@ pcc_t i18n_c::GetString(int id)
 	{
 		case STRING_USAGE:						return 	"Syntax: paping [options] destination\n\n"
 														"Options:\n"
-														" -?, --help\tdisplay usage\n"
+														" -h, -?, --help\tdisplay usage\n"
 														" -p, --port N\tset TCP port N (required)\n"
 														//" -p, --port N\tset TCP/UDP port N (required)\n"
 														//"     --tcp\tuse TCP protocol (default)\n"
 														"     --nocolor\tDisable color output\n"
-														" -t, --timeout\ttimeout in milliseconds (default 1000)\n"
+														" -t, --timeout N\ttimeout in milliseconds (default 1000)\n"
 														" -c, --count N\tset number of checks to N\n";
 
 		case STRING_STATS:						return	"\n"

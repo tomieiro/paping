@@ -56,11 +56,13 @@ typedef				char*		pc_t;
 typedef	unsigned	short		ushort_t;
 
 #include "print.h"
-#include "i18n.h"
 #include "stats.h"
 #include "timer.h"
-#include "arguments.h"
-#include "host.h"
-#include "socket.h"
+
+#include "cli/i18n.h"
+#include "cli/arguments.h"
+
+#include "net/host.h"
+#include "net/socket.h"
 
 
